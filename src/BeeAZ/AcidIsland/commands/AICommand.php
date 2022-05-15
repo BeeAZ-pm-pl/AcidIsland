@@ -98,7 +98,8 @@ class AICommand extends Command{
   $this->help->onCommand($player);
    }
 }
-  public function getOwningPlugin() : AcidIsland
+  public function getOwningPlugin() : AcidIsland{
     return $this->plugin;
-	}
+	
+}
 }
