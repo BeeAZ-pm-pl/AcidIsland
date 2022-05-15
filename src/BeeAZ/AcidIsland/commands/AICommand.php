@@ -6,6 +6,7 @@ use pocketmine\command\Command;
 use pocketmine\player\Player;
 use BeeAZ\AcidIsland\AcidIsland;
 use pocketmine\command\CommandSender;
+use pocketmine\plugin\PluginOwned;
 use BeeAZ\AcidIsland\commands\subcommand\Join;
 use BeeAZ\AcidIsland\commands\subcommand\Help;
 use BeeAZ\AcidIsland\commands\subcommand\Add;
@@ -18,6 +19,8 @@ use BeeAZ\AcidIsland\commands\subcommand\Delete;
 use BeeAZ\AcidIsland\commands\subcommand\About;
 
 class AICommand extends Command{
+
+  public $plugin;
   
   private $join;
   
@@ -39,8 +42,9 @@ class AICommand extends Command{
   
   private $about;
   
-  public function __construct(){
+  public function __construct(AcidIsland $plugin){
   parent::__construct("acidisland", "AcidIsland Command", null, ["ai", "ac"]);
+  $this->plugin = $plugin;
   $this->join = new Join();
   $this->help = new Help();
   $this->add = new Add();
@@ -94,4 +98,7 @@ class AICommand extends Command{
   $this->help->onCommand($player);
    }
 }
+  public function getOwningPlugin() : AcidIsland
+    return $this->plugin;
+	}
 }
