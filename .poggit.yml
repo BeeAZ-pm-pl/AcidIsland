@@ -3,7 +3,7 @@ build-by-default: true
 branches:
 - master
 projects:
-  AcidIsland:
+  AcidIslandPE:
     path: ""
     lint: false
 ...
