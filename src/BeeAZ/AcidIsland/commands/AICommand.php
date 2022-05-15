@@ -18,7 +18,7 @@ use BeeAZ\AcidIsland\commands\subcommand\Kick;
 use BeeAZ\AcidIsland\commands\subcommand\Delete;
 use BeeAZ\AcidIsland\commands\subcommand\About;
 
-class AICommand extends Command{
+class AICommand extends Command implements PluginOwned{
 
   public $plugin;
   
@@ -100,6 +100,5 @@ class AICommand extends Command{
 }
   public function getOwningPlugin() : AcidIsland{
     return $this->plugin;
-	
 }
 }
