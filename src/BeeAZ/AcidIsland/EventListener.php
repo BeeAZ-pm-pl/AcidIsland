@@ -26,10 +26,10 @@ class EventListener implements Listener{
   $z = $player->getPosition()->getZ();
   $pos = new Position($x, $y + 1, $z, $world);
   $block = [8,9];
+  $effect = [19, 20, 15];
  if(in_array($world->getBlock($pos)->getId(), $block)){
- foreach(AcidIsland::getInstance()->cfg->get("effect") as $effect){
- $player->getEffects()->add(new EffectInstance(EffectIdMap::getInstance()->fromId($effect), 40, 1, true));
- 
+ foreach($effect as $e){
+ $player->getEffects()->add(new EffectInstance(EffectIdMap::getInstance()->fromId($e), 40, 1, true));
  AcidIsland::getInstance()->playSound($player, "random.orb", 1, 1);
  $player->sendTitle("§c§lWARNING");
  }
@@ -46,7 +46,7 @@ class EventListener implements Listener{
  if($world !== $name){
  $friend = explode(",", $ai->acid->getNested("$world.member"));
  if(!in_array(strtolower($name), $friend)){
- $player->sendMessage("§a§l[AcidIsland] §cYou do not have permission to touch here");
+ $player->sendMessage("☞ §a§l[AcidIsland] §cYou do not have permission to touch here");
  $ev->cancel();
  }
  }
@@ -62,7 +62,7 @@ class EventListener implements Listener{
  if($world !== $name){
  $friend = explode(",", $ai->acid->getNested("$world.member"));
  if(!in_array(strtolower($name), $friend)){
- $player->sendMessage("§a§l[AcidIsland] §cYou do not have permission to break here");
+ $player->sendMessage("☞ §a§l[AcidIsland] §cYou do not have permission to break here");
  $ev->cancel();
  }
  }
@@ -78,7 +78,7 @@ class EventListener implements Listener{
  if($world !== $name){
  $friend = explode(",", $ai->acid->getNested("$world.member"));
  if(!in_array(strtolower($name), $friend)){
- $player->sendMessage("§a§l[AcidIsland] §cYou do not have permission to touch here");
+ $player->sendMessage("☞ §a§l[AcidIsland] §cYou do not have permission to touch here");
  $ev->cancel();
  }
  }
@@ -92,7 +92,7 @@ class EventListener implements Listener{
   $ai = AcidIsland::getInstance();
  if($ai->isAcidIsland($entity->getWorld()) && $world !== Server::getInstance()->getWorldManager()->getDefaultWorld()->getDisplayName()){
  if($ai->acid->getNested("$world.pvp") == false){
- $entity->sendMessage("§a§l[AcidIsland] §cYou do not have permission to touch here");
+ $entity->sendMessage("☞ §a§l[AcidIsland] §cYou do not have permission to touch here");
  $ev->cancel();
  }
 }
