@@ -19,7 +19,7 @@ use BeeAZ\AcidIsland\commands\subcommand\Delete;
 use BeeAZ\AcidIsland\commands\subcommand\About;
 
 class AICommand extends Command implements PluginOwned{
-
+  
   public $plugin;
   
   private $join;
@@ -42,9 +42,8 @@ class AICommand extends Command implements PluginOwned{
   
   private $about;
   
-  public function __construct(AcidIsland $plugin){
+  public function __construct(){
   parent::__construct("acidisland", "AcidIsland Command", null, ["ai", "ac"]);
-  $this->plugin = $plugin;
   $this->join = new Join();
   $this->help = new Help();
   $this->add = new Add();
@@ -98,7 +97,7 @@ class AICommand extends Command implements PluginOwned{
   $this->help->onCommand($player);
    }
 }
-  public function getOwningPlugin() : AcidIsland{
-    return $this->plugin;
-}
+ public function getOwningPlugin(): AcidIsland{
+  return $this->plugin;
+ }
 }

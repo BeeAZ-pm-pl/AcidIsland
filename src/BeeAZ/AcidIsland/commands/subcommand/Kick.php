@@ -21,7 +21,7 @@ class Kick{
   $name = implode(" ", array_slice($args, 1));
   if($server->getPlayerExact($name) !== null){
   $p = $server->getPlayerExact($name);
-  if($p->getWorld()->getDisplayName() == $player->getName()){
+  if($p->getWorld()->getDisplayName() == "ai-".$player->getName()){
   $p->teleport($server->getWorldManager()->getDefaultWorld()->getSafeSpawn());
   $player->sendMessage($ai->cfg->get("ISLAND-KICK"));
   $p->sendMessage($ai->cfg->get("ISLAND-KICK2"));

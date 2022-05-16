@@ -38,7 +38,7 @@ class AcidIsland extends PluginBase implements Listener{
  }
  
  public function isIsland($name){
-  return $this->getServer()->getWorldManager()->isWorldGenerated($name);
+  return $this->getServer()->getWorldManager()->isWorldGenerated("ai-".$name);
  }
  
  public function createData(Player $player){
@@ -67,11 +67,4 @@ class AcidIsland extends PluginBase implements Listener{
     $packet->pitch = $pitch;
     $player->getNetworkSession()->sendDataPacket($packet);
   }
-  
- public function isAcidIsland(World $world){
-     foreach($this->acid->getAll() as $name => $data){
-      if($name === $world->getDisplayName()) return true;
-     }
-     return false;
-    }
 }

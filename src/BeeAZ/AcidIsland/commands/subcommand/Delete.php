@@ -44,8 +44,8 @@ class Delete{
 }
  
  public function removeIsland($name){
- if(Server::getInstance()->getWorldManager()->isWorldLoaded($name)){
-  $world = Server::getInstance()->getWorldManager()->getWorldByName($name);
+ if(Server::getInstance()->getWorldManager()->isWorldLoaded("ai-". $name)){
+  $world = Server::getInstance()->getWorldManager()->getWorldByName("ai-".$name);
   if(count($world->getPlayers()) > 0){
   foreach($world->getPlayers() as $players){
     $players->teleport(Server::getInstance()->getWorldManager()->getDefaultWorld()->getSafeSpawn());
@@ -53,7 +53,7 @@ class Delete{
   }
   Server::getInstance()->getWorldManager()->unloadWorld($world);
  }
- $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($worldPath = Server::getInstance()->getDataPath() . "/worlds/$name", FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST);
+ $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($worldPath = Server::getInstance()->getDataPath() . "/worlds/ai-$name", FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST);
         foreach($files as $fileInfo) {
             if($filePath = $fileInfo->getRealPath()) {
                 if($fileInfo->isFile()) {

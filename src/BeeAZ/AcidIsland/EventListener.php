@@ -26,10 +26,10 @@ class EventListener implements Listener{
   $z = $player->getPosition()->getZ();
   $pos = new Position($x, $y + 1, $z, $world);
   $block = [8,9];
-  $effect = [19, 20, 15];
+  $e = [15, 19, 20];
  if(in_array($world->getBlock($pos)->getId(), $block)){
- foreach($effect as $e){
- $player->getEffects()->add(new EffectInstance(EffectIdMap::getInstance()->fromId($e), 40, 1, true));
+ foreach($e as $effect){
+ $player->getEffects()->add(new EffectInstance(EffectIdMap::getInstance()->fromId($effect), 200, 2, true));
  AcidIsland::getInstance()->playSound($player, "random.orb", 1, 1);
  $player->sendTitle("§c§lWARNING");
  }
@@ -42,9 +42,10 @@ class EventListener implements Listener{
   $world = $player->getWorld()->getDisplayName();
   $name = $player->getName();
   $ai = AcidIsland::getInstance();
- if($ai->isAcidIsland($player->getWorld()) && $world !== Server::getInstance()->getWorldManager()->getDefaultWorld()->getDisplayName()){
- if($world !== $name){
- $friend = explode(",", $ai->acid->getNested("$world.member"));
+  $ex = explode("-", $world);
+ if($ex[0] == "ai"){
+ if($ex[1] !== $name){ #When playing in someone else's world 
+ $friend = explode(",", $ai->acid->getNested("$ex[1].member"));
  if(!in_array(strtolower($name), $friend)){
  $player->sendMessage("☞ §a§l[AcidIsland] §cYou do not have permission to touch here");
  $ev->cancel();
@@ -58,9 +59,10 @@ class EventListener implements Listener{
   $world = $player->getWorld()->getDisplayName();
   $name = $player->getName();
   $ai = AcidIsland::getInstance();
- if($ai->isAcidIsland($player->getWorld()) && $world !== Server::getInstance()->getWorldManager()->getDefaultWorld()->getDisplayName()){
- if($world !== $name){
- $friend = explode(",", $ai->acid->getNested("$world.member"));
+  $ex = explode("-", $world);
+ if($ex[0] == "ai"){
+ if($ex[1] !== $name){ #When playing in someone else's world 
+ $friend = explode(",", $ai->acid->getNested("$ex[1].member"));
  if(!in_array(strtolower($name), $friend)){
  $player->sendMessage("☞ §a§l[AcidIsland] §cYou do not have permission to break here");
  $ev->cancel();
@@ -68,17 +70,19 @@ class EventListener implements Listener{
  }
 }
 }
+
  public function onPlace(BlockPlaceEvent $ev){
  if(Server::getInstance()->isOp($ev->getPlayer()->getName())) return;
   $player = $ev->getPlayer();
   $world = $player->getWorld()->getDisplayName();
   $name = $player->getName();
   $ai = AcidIsland::getInstance();
- if($ai->isAcidIsland($player->getWorld()) && $world !== Server::getInstance()->getWorldManager()->getDefaultWorld()->getDisplayName()){
- if($world !== $name){
- $friend = explode(",", $ai->acid->getNested("$world.member"));
+  $ex = explode("-", $world);
+ if($ex[0] == "ai"){
+ if($ex[1] !== $name){ #When playing in someone else's world 
+ $friend = explode(",", $ai->acid->getNested("$ex[1].member"));
  if(!in_array(strtolower($name), $friend)){
- $player->sendMessage("☞ §a§l[AcidIsland] §cYou do not have permission to touch here");
+ $player->sendMessage("☞ §a§l[AcidIsland] §cYou do not have permission to place here");
  $ev->cancel();
  }
  }
@@ -87,14 +91,19 @@ class EventListener implements Listener{
 
  public function onDamage(EntityDamageByEntityEvent $ev){
   $entity = $ev->getEntity();
- if($entity instanceof Player){
+  $damager = $ev->getDamager();
+ if($entity instanceof Player && $damager instanceof Player){
   $world = $entity->getWorld()->getDisplayName();
+  $name = $damager->getName();
   $ai = AcidIsland::getInstance();
- if($ai->isAcidIsland($entity->getWorld()) && $world !== Server::getInstance()->getWorldManager()->getDefaultWorld()->getDisplayName()){
- if($ai->acid->getNested("$world.pvp") == false){
- $entity->sendMessage("☞ §a§l[AcidIsland] §cYou do not have permission to touch here");
+ $ex = explode("-", $world);
+ if($ex[0] == "ai"){
+ if($ex[1] !== $name){ #When playing in someone else's world 
+ if($ai->acid->getNested("$ex[1].pvp") === false){
+ $damager->sendMessage("☞ §a§l[AcidIsland] §cYou do not have permission to pvp here");
  $ev->cancel();
  }
+}
 }
 }
 }

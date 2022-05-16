@@ -22,8 +22,8 @@ class Teleport{
   $ai = AcidIsland::getInstance();
   if($ai->isIsland($name)){
   if($ai->acid->getNested("$name.lock") == false){
-  Server::getInstance()->getWorldManager()->loadWorld($name);
-  $player->teleport(new Position(7, 65, 5, Server::getInstance()->getWorldManager()->getWorldByName($name)));
+  Server::getInstance()->getWorldManager()->loadWorld("ai-".$name);
+  $player->teleport(new Position(7, 65, 5, Server::getInstance()->getWorldManager()->getWorldByName("ai-".$name)));
    $player->sendMessage(str_replace("{island}", $name, $ai->cfg->get("ISLAND-TELEPORT")));
    }else{
     $player->sendMessage($ai->cfg->get("ISLAND-TELEPORT-LOCK"));
