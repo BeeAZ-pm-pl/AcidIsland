@@ -10,7 +10,7 @@ use pocketmine\entity\effect\EffectInstance;
 use pocketmine\data\bedrock\EffectIdMap;
 use BeeAZ\AcidIsland\AcidIsland;
 use pocketmine\event\player\PlayerMoveEvent;
-use pocketmine\event\player\BlockPlaceEvent;
+use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
