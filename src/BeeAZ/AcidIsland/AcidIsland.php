@@ -11,8 +11,6 @@ use BeeAZ\AcidIsland\EventListener;
 use pocketmine\utils\Config;
 use pocketmine\player\Player;
 use pocketmine\item\ItemFactory;
-use pocketmine\world\Position;
-use pocketmine\world\World;
 use BeeAZ\AcidIsland\commands\AICommand;
 
 class AcidIsland extends PluginBase implements Listener{
