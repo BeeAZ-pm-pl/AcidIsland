@@ -29,7 +29,7 @@ class EventListener implements Listener{
   $pos = new Position($x, $y + 1, $z, $world);
  $ex = explode("-", $wn);
  if($ex[0] == "ai"){
- if($world->getBlock($pos)->getId() === BlockLegacyIds::WATER)){
+ if($world->getBlock($pos)->getId() === BlockLegacyIds::WATER){
  $player->getEffects()->add(new EffectInstance(EffectIdMap::getInstance()->fromId(EffectIds::BLINDNESS), 200, 2, true));
  $player->getEffects()->add(new EffectInstance(EffectIdMap::getInstance()->fromId(EffectIds::POISON), 200, 2, true));
  $player->getEffects()->add(new EffectInstance(EffectIdMap::getInstance()->fromId(EffectIds::WITHER), 200, 2, true));
