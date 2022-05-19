@@ -16,10 +16,10 @@ class Info{
  if(count($args) < 2){
   return true;
  }
- $name = implode(" ", array_slice($args, 1));
+ $name = strtolower(implode(" ", array_slice($args, 1)));
  $ai = AcidIsland::getInstance();
  if($ai->isIsland($name)){
-   $member = $ai->acid->getNested("$name.member");
+   $member = $ai->getIsland($name)->get("member");
    $pvp = $this->getPVP($name);
    $lock = $this->getLock($name);
    $player->sendMessage(str_replace(["{member}", "{pvp}", "{lock}"], [$member, $pvp, $lock], $ai->cfg->get("ISLAND-INFO")));
@@ -30,7 +30,7 @@ class Info{
 
  public function getPVP($name){
  $ai = AcidIsland::getInstance();
- $pvp = $ai->acid->getNested("$name.pvp");
+ $pvp = $ai->getIsland($name)->get("pvp");
  if($pvp === true){
   return "on";
  }
@@ -41,7 +41,7 @@ class Info{
  
  public function getLock($name){
   $ai = AcidIsland::getInstance();
-  $lock = $ai->acid->getNested("$name.lock");
+  $lock = $ai->getIsland($name)->get("lock");
  if($lock === true){
   return "on";
  }

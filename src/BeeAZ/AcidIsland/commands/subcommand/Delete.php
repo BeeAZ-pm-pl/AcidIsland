@@ -16,22 +16,20 @@ class Delete{
   
  
  public function onCommand(CommandSender $player, array $args){
-  $name = $player->getName();
+  $name = strtolower($player->getName());
   $ai = AcidIsland::getInstance();
   if($player->hasPermission("acidisland.delete")){
   if(count($args) < 2){
   if($ai->isIsland($name)){
    $this->removeIsland($name);
-   $ai->removeIslandData($name);
    $player->sendMessage($ai->cfg->get("ISLAND-DELETE"));
   return true;
   }
   }else{
-  $a = implode(" ", array_slice($args, 1));
+  $a = strtolower(implode(" ", array_slice($args, 1)));
   if($player->hasPermission("acidisland.delete.other")){
   if($ai->isIsland($a)){
    $this->removeIsland($a);
-   $ai->removeIslandData($a);
    $player->sendMessage($ai->cfg->get("ISLAND-DELETE-OTHER"));
   }else{
    $player->sendMessage($ai->cfg->get("ISLAND-NOTFOUND"));

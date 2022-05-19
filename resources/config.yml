@@ -14,8 +14,6 @@ start-item:
  - "300:0:1"
  - "301:0:1"
 
-
-
 #message
 ISLAND-NOTFOUND: "§e§lIsland Not Found"
 PLAYER-NOTFOUND: "§e§lPlayer Not Found"

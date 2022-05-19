@@ -16,33 +16,29 @@ class Setting{
   if(count($args) < 2){
    return true;
   }
-  $ar = implode(" ", array_slice($args, 1));
+  $ar = strtolower(implode(" ", array_slice($args, 1)));
   $ai = AcidIsland::getInstance();
-  $name = $player->getName();
+  $name = strtolower($player->getName());
   if($ai->isIsland($name)){
     switch($ar){
        case "pvp":
-       $name = $player->getName();
-       $ai->acid->setNested("$name.pvp", true);
-       $ai->acid->save();
+       $name = strtolower($player->getName());
+       $ai->setData($name, "pvp", true);
        $player->sendMessage($ai->cfg->get("PVP"));
        break;
        case "nopvp":
-       $name = $player->getName();
-       $ai->acid->setNested("$name.pvp", false);
-       $ai->acid->save();
+       $name = strtolower($player->getName());
+       $ai->setData($name, "pvp", false);
        $player->sendMessage($ai->cfg->get("NOPVP"));
        break;
        case "lock":
-       $name = $player->getName();
-       $ai->acid->setNested("$name.lock", true);
-       $ai->acid->save();
+       $name = strtolower($player->getName());
+       $ai->setData($name, "lock", true);
        $player->sendMessage($ai->cfg->get("LOCK"));
        break;
        case "unlock":
-       $name = $player->getName();
-       $ai->acid->setNested("$name.lock", false);
-       $ai->acid->save();
+       $name = strtolower($player->getName());
+       $ai->setData($name, "lock", false);
        $player->sendMessage($ai->cfg->get("UNLOCK"));
        break;
   }

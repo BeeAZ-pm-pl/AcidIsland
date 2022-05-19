@@ -12,21 +12,22 @@ use BeeAZ\AcidIsland\AcidIsland;
 use pocketmine\event\player\PlayerMoveEvent;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\block\BlockBreakEvent;
-use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 
 class EventListener implements Listener{
 
  public function onMove(PlayerMoveEvent $ev){
-  if($ev->isCancelled()) return;
   $player = $ev->getPlayer();
   $world = $player->getWorld();
+  $wn = $world->getDisplayName();
   $x = $player->getPosition()->getX();
   $y = $player->getPosition()->getY();
   $z = $player->getPosition()->getZ();
   $pos = new Position($x, $y + 1, $z, $world);
-  $block = [8,9];
+  $block = [8, 9];
   $e = [15, 19, 20];
+ $ex = explode("-", $wn);
+ if($ex[0] == "ai"){
  if(in_array($world->getBlock($pos)->getId(), $block)){
  foreach($e as $effect){
  $player->getEffects()->add(new EffectInstance(EffectIdMap::getInstance()->fromId($effect), 200, 2, true));
@@ -35,18 +36,19 @@ class EventListener implements Listener{
  }
 }
 }
+}
 
  public function onInteract(PlayerInteractEvent $ev){
  if(Server::getInstance()->isOp($ev->getPlayer()->getName())) return;
   $player = $ev->getPlayer();
   $world = $player->getWorld()->getDisplayName();
-  $name = $player->getName();
+  $name = strtolower($player->getName());
   $ai = AcidIsland::getInstance();
   $ex = explode("-", $world);
  if($ex[0] == "ai"){
- if($ex[1] !== $name){ #When playing in someone else's world 
- $friend = explode(",", $ai->acid->getNested("$ex[1].member"));
- if(!in_array(strtolower($name), $friend)){
+ if($ex[1] !== $name){
+ $friend = explode(",", $ai->getIsland($ex[1])->get("member"));
+ if(!in_array($name, $friend)){
  $player->sendMessage("☞ §a§l[AcidIsland] §cYou do not have permission to touch here");
  $ev->cancel();
  }
@@ -57,32 +59,14 @@ class EventListener implements Listener{
  if(Server::getInstance()->isOp($ev->getPlayer()->getName())) return;
   $player = $ev->getPlayer();
   $world = $player->getWorld()->getDisplayName();
-  $name = $player->getName();
+  $name = strtolower($player->getName());
   $ai = AcidIsland::getInstance();
   $ex = explode("-", $world);
  if($ex[0] == "ai"){
- if($ex[1] !== $name){ #When playing in someone else's world 
- $friend = explode(",", $ai->acid->getNested("$ex[1].member"));
- if(!in_array(strtolower($name), $friend)){
+ if($ex[1] !== $name){
+ $friend = explode(",", $ai->getIsland($ex[1])->get("member"));
+ if(!in_array($name, $friend)){
  $player->sendMessage("☞ §a§l[AcidIsland] §cYou do not have permission to break here");
- $ev->cancel();
- }
- }
-}
-}
-
- public function onPlace(BlockPlaceEvent $ev){
- if(Server::getInstance()->isOp($ev->getPlayer()->getName())) return;
-  $player = $ev->getPlayer();
-  $world = $player->getWorld()->getDisplayName();
-  $name = $player->getName();
-  $ai = AcidIsland::getInstance();
-  $ex = explode("-", $world);
- if($ex[0] == "ai"){
- if($ex[1] !== $name){ #When playing in someone else's world 
- $friend = explode(",", $ai->acid->getNested("$ex[1].member"));
- if(!in_array(strtolower($name), $friend)){
- $player->sendMessage("☞ §a§l[AcidIsland] §cYou do not have permission to place here");
  $ev->cancel();
  }
  }
@@ -94,12 +78,12 @@ class EventListener implements Listener{
   $damager = $ev->getDamager();
  if($entity instanceof Player && $damager instanceof Player){
   $world = $entity->getWorld()->getDisplayName();
-  $name = $damager->getName();
+  $name = strtolower($damager->getName());
   $ai = AcidIsland::getInstance();
- $ex = explode("-", $world);
+  $ex = explode("-", $world);
  if($ex[0] == "ai"){
- if($ex[1] !== $name){ #When playing in someone else's world 
- if($ai->acid->getNested("$ex[1].pvp") === false){
+ if($ex[1] !== $name){
+ if($ai->getIsland($ex[1])->get("pvp") === false){
  $damager->sendMessage("☞ §a§l[AcidIsland] §cYou do not have permission to pvp here");
  $ev->cancel();
  }

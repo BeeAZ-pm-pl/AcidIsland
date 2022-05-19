@@ -16,18 +16,17 @@ class Add{
   if(!$player->hasPermission("acidisland.add")){
    return true;
   }
-  $name1 = $player->getName();
+  $name1 = strtolower($player->getName());
   $name2 = strtolower(implode(" ", array_slice($args, 1)));
   $server = Server::getInstance();
   $ai = AcidIsland::getInstance();
   if($server->getPlayerExact($name2) !== null){
   if($ai->isIsland($name1)){
-  $ex = explode(",", $ai->acid->getNested("$name1.member"));
+  $ex = explode(",", $ai->getIsland($name1)->get("member"));
   if(!in_array($name2, $ex)){
   $im = implode(",", $ex);
   $add = "$im,".$name2;
-  $ai->acid->setNested("$name1.member", $add);
-  $ai->acid->save();
+  $ai->setData($name1, "member", $add);
   $player->sendMessage($ai->cfg->get("ISLAND-ADD"));
   }else{
    $player->sendMessage($ai->cfg->get("ISLAND-ADDERROR"));

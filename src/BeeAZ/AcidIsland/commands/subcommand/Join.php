@@ -29,7 +29,7 @@ class Join{
   }
   }
   public function createIsland(Player $player){
-  $name = $player->getName();
+  $name = strtolower($player->getName());
   $ai = AcidIsland::getInstance();
   $seed = mt_rand();
   $generator = GeneratorManager::getInstance()->getGenerator("basic");

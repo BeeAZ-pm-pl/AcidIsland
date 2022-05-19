@@ -28,7 +28,7 @@ class AcidIsland extends PluginBase implements Listener{
   GeneratorManager::getInstance()->addGenerator(basic::class, "basic", fn() => null, true);
   $this->saveDefaultConfig();
   $this->cfg = new Config($this->getDataFolder()."config.yml",Config::YAML);
-  $this->acid = new Config($this->getDataFolder()."acid.yml",Config::YAML);
+  @mkdir($this->getDataFolder()."islands/");
   $this->getServer()->getCommandMap()->register($this->getDescription()->getName(), new AICommand($this));
   self::$instance = $this;
  }
@@ -42,20 +42,15 @@ class AcidIsland extends PluginBase implements Listener{
  }
  
  public function createData(Player $player){
- $name = $player->getName();
- $this->acid->setNested("$name.member", strtolower($name));
- $this->acid->setNested("$name.pvp", false);
- $this->acid->setNested("$name.lock", false);
- $this->acid->save();
+ $name = strtolower($player->getName());
+ $this->setData($name, "member", $name);
+ $this->setData($name, "lock", false);
+ $this->setData($name, "pvp", false);
  foreach($this->cfg->get("start-item") as $start){
   $item = explode(":", $start);
    $player->getInventory()->addItem(ItemFactory::getInstance()->get((int)$item[0], (int)$item[1], (int)$item[2]));
 }
 }
- public function removeIslandData($name){
- $this->acid->remove($name);
- $this->acid->save();
- }
 
  public function playSound($player, string $sound, float $volume = 0, float $pitch = 0): void{
     $packet = new PlaySoundPacket();
@@ -67,4 +62,22 @@ class AcidIsland extends PluginBase implements Listener{
     $packet->pitch = $pitch;
     $player->getNetworkSession()->sendDataPacket($packet);
   }
+  
+ public function getIsland($name){
+   $dir = $this->getDataFolder() . "/islands/" . substr($name, 0, 1) . "/";
+    if (!is_dir($dir)) {
+      mkdir($dir);
+     }
+    $cfg = new Config($dir . "$name.yml", Config::YAML);
+    return $cfg;
+    }
+ public function setData($name, $key, $data){
+   $dir = $this->getDataFolder() . "/islands/" . substr($name, 0, 1) . "/";
+    if (!is_dir($dir)) {
+      mkdir($dir);
+     }
+    $cfg = new Config($dir . "$name.yml", Config::YAML);
+    $cfg->set($key, $data);
+    $cfg->save();
+    }
 }
