@@ -19,8 +19,6 @@ class AcidIsland extends PluginBase implements Listener{
 
  public $cfg;
  
- public $acid;
- 
  private static AcidIsland $instance;
 
  public function onEnable(): void{
