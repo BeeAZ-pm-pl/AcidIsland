@@ -16,7 +16,7 @@ class Join{
   if(!$player->hasPermission("acidisland.join")){
   return true;
   }
-  $name = $player->getName();
+  $name = strtolower($player->getName());
   $ai = AcidIsland::getInstance();
   if($ai->isIsland($name)){
    Server::getInstance()->getWorldManager()->loadWorld("ai-".$name);
