@@ -9,6 +9,8 @@ use pocketmine\world\Position;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\data\bedrock\EffectIdMap;
 use BeeAZ\AcidIsland\AcidIsland;
+use pocketmine\block\BlockLegacyIds;
+use pocketmine\data\bedrock\EffectIds;
 use pocketmine\event\player\PlayerMoveEvent;
 use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\player\PlayerInteractEvent;
@@ -25,17 +27,15 @@ class EventListener implements Listener{
   $y = $player->getPosition()->getY();
   $z = $player->getPosition()->getZ();
   $pos = new Position($x, $y + 1, $z, $world);
-  $block = [8, 9];
-  $e = [15, 19, 20];
  $ex = explode("-", $wn);
  if($ex[0] == "ai"){
- if(in_array($world->getBlock($pos)->getId(), $block)){
- foreach($e as $effect){
- $player->getEffects()->add(new EffectInstance(EffectIdMap::getInstance()->fromId($effect), 200, 2, true));
+ if($world->getBlock($pos)->getId() === BlockLegacyIds::WATER)){
+ $player->getEffects()->add(new EffectInstance(EffectIdMap::getInstance()->fromId(EffectIds::BLINDNESS), 200, 2, true));
+ $player->getEffects()->add(new EffectInstance(EffectIdMap::getInstance()->fromId(EffectIds::POISON), 200, 2, true));
+ $player->getEffects()->add(new EffectInstance(EffectIdMap::getInstance()->fromId(EffectIds::WITHER), 200, 2, true));
  AcidIsland::getInstance()->playSound($player, "random.orb", 1, 1);
  $player->sendTitle("§c§lWARNING");
  }
-}
 }
 }
 
