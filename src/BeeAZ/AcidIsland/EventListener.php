@@ -10,6 +10,7 @@ use pocketmine\entity\effect\EffectInstance;
 use pocketmine\data\bedrock\EffectIdMap;
 use BeeAZ\AcidIsland\AcidIsland;
 use pocketmine\event\player\PlayerMoveEvent;
+use pocketmine\event\player\BlockPlaceEvent;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
@@ -67,6 +68,23 @@ class EventListener implements Listener{
  $friend = explode(",", $ai->getIsland($ex[1])->get("member"));
  if(!in_array($name, $friend)){
  $player->sendMessage("☞ §a§l[AcidIsland] §cYou do not have permission to break here");
+ $ev->cancel();
+ }
+ }
+}
+}
+ public function onPlace(BlockPlaceEvent $ev){
+ if(Server::getInstance()->isOp($ev->getPlayer()->getName())) return;
+  $player = $ev->getPlayer();
+  $world = $player->getWorld()->getDisplayName();
+  $name = strtolower($player->getName());
+  $ai = AcidIsland::getInstance();
+  $ex = explode("-", $world);
+ if($ex[0] == "ai"){
+ if($ex[1] !== $name){
+ $friend = explode(",", $ai->getIsland($ex[1])->get("member"));
+ if(!in_array($name, $friend)){
+ $player->sendMessage("☞ §a§l[AcidIsland] §cYou do not have permission to place here");
  $ev->cancel();
  }
  }
