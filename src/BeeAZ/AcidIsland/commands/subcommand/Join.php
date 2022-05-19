@@ -6,8 +6,6 @@ use pocketmine\Server;
 use pocketmine\player\Player;
 use BeeAZ\AcidIsland\AcidIsland;
 use pocketmine\command\CommandSender;
-use pocketmine\world\WorldManager;
-use pocketmine\world\World;
 use pocketmine\world\generator\GeneratorManager;
 use pocketmine\world\WorldCreationOptions;
 use pocketmine\world\Position;
