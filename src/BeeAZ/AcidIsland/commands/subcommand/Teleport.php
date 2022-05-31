@@ -13,23 +13,23 @@ class Teleport{
  
  public function onCommand(CommandSender $player, array $args){
   if(!$player->hasPermission("acidisland.teleport")){
-  return true;
+    return true;
   }
   if(count($args) < 2){
-  return true;
+    return true;
   }
-  $name = strtolower(implode(" ", array_slice($args, 1)));
-  $ai = AcidIsland::getInstance();
-  if($ai->isIsland($name)){
-  if($ai->getIsland($name)->get("lock") === false){
-  Server::getInstance()->getWorldManager()->loadWorld("ai-".$name);
-  $player->teleport(new Position(7, 65, 5, Server::getInstance()->getWorldManager()->getWorldByName("ai-".$name)));
-   $player->sendMessage(str_replace("{island}", $name, $ai->cfg->get("ISLAND-TELEPORT")));
-   }else{
-    $player->sendMessage($ai->cfg->get("ISLAND-TELEPORT-LOCK"));
-   }
+    $name = strtolower(implode(" ", array_slice($args, 1)));
+    $ai = AcidIsland::getInstance();
+      if($ai->isIsland($name)){
+        if($ai->getIsland($name)->get("lock") === false){
+          Server::getInstance()->getWorldManager()->loadWorld("ai-".$name);
+          $player->teleport(new Position(7, 65, 5, Server::getInstance()->getWorldManager()->getWorldByName("ai-".$name)));
+          $player->sendMessage(str_replace("{island}", $name, $ai->cfg->get("ISLAND-TELEPORT")));
+     }else{
+       $player->sendMessage($ai->cfg->get("ISLAND-TELEPORT-LOCK"));
+    }
    }else{
      $player->sendMessage($ai->cfg->get("ISLAND-NOTFOUND"));
    }
-   }
+  }
  }
