@@ -31,12 +31,12 @@ class Add{
      }else{
        $player->sendMessage($ai->cfg->get("ISLAND-ADDERROR"));
      }
-  }else{
+   }else{
     $player->sendMessage($ai->cfg->get("ISLAND-NOTFOUND"));
    }
- }else{
+  }else{
    $player->sendMessage($ai->cfg->get("PLAYER-NOTFOUND"));
-   }
-return true;
   }
+ return true;
+ }
 }
