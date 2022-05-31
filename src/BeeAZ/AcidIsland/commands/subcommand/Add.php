@@ -10,33 +10,33 @@ use BeeAZ\AcidIsland\AcidIsland;
 class Add{
   
  public function onCommand(CommandSender $player, array $args){
-  if(count($args) < 2){
-   return true;
+   if(count($args) < 2){
+     return true;
   }
-  if(!$player->hasPermission("acidisland.add")){
-   return true;
+   if(!$player->hasPermission("acidisland.add")){
+     return true;
   }
-  $name1 = strtolower($player->getName());
-  $name2 = strtolower(implode(" ", array_slice($args, 1)));
-  $server = Server::getInstance();
-  $ai = AcidIsland::getInstance();
-  if($server->getPlayerExact($name2) !== null){
-  if($ai->isIsland($name1)){
-  $ex = explode(",", $ai->getIsland($name1)->get("member"));
-  if(!in_array($name2, $ex)){
-  $im = implode(",", $ex);
-  $add = "$im,".$name2;
-  $ai->setData($name1, "member", $add);
-  $player->sendMessage($ai->cfg->get("ISLAND-ADD"));
+    $name = strtolower($player->getName());
+    $data = strtolower(implode(" ", array_slice($args, 1)));
+    $server = Server::getInstance();
+    $ai = AcidIsland::getInstance();
+      if($server->getPlayerExact($data) !== null){
+        if($ai->isIsland($name)){
+          $ex = explode(",", $ai->getIsland($name)->get("member"));
+            if(!in_array($data, $ex)){
+              $im = implode(",", $ex);
+              $add = "$im,".$data;
+              $ai->setData($name, "member", $add);
+              $player->sendMessage($ai->cfg->get("ISLAND-ADD"));
+     }else{
+       $player->sendMessage($ai->cfg->get("ISLAND-ADDERROR"));
+     }
   }else{
-   $player->sendMessage($ai->cfg->get("ISLAND-ADDERROR"));
+    $player->sendMessage($ai->cfg->get("ISLAND-NOTFOUND"));
    }
-  }else{
-  $player->sendMessage($ai->cfg->get("ISLAND-NOTFOUND"));
-  }
-  }else{
+ }else{
    $player->sendMessage($ai->cfg->get("PLAYER-NOTFOUND"));
-  }
-  return true;
+   }
+return true;
   }
 }
