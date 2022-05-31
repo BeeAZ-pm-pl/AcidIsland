@@ -38,42 +38,43 @@ class AcidIsland extends PluginBase implements Listener{
  }
  
  public function createData(Player $player){
- $name = strtolower($player->getName());
- $this->setData($name, "member", $name);
- $this->setData($name, "lock", false);
- $this->setData($name, "pvp", false);
- foreach($this->cfg->get("start-item") as $start){
-  $item = explode(":", $start);
-   $player->getInventory()->addItem(ItemFactory::getInstance()->get((int)$item[0], (int)$item[1], (int)$item[2]));
-}
+  $name = strtolower($player->getName());
+  $this->setData($name, "member", $name);
+  $this->setData($name, "lock", false);
+  $this->setData($name, "pvp", false);
+    foreach($this->cfg->get("start-item") as $start){
+      $item = explode(":", $start);
+      $player->getInventory()->addItem(ItemFactory::getInstance()->get((int)$item[0], (int)$item[1], (int)$item[2]));
+  }
 }
 
  public function playSound($player, string $sound, float $volume = 0, float $pitch = 0): void{
-    $packet = new PlaySoundPacket();
-    $packet->soundName = $sound;
-    $packet->x = $player->getPosition()->getX();
-    $packet->y = $player->getPosition()->getY();
-    $packet->z = $player->getPosition()->getZ();
-    $packet->volume = $volume;
-    $packet->pitch = $pitch;
-    $player->getNetworkSession()->sendDataPacket($packet);
+  $packet = new PlaySoundPacket();
+  $packet->soundName = $sound;
+  $packet->x = $player->getPosition()->getX();
+  $packet->y = $player->getPosition()->getY();
+  $packet->z = $player->getPosition()->getZ();
+  $packet->volume = $volume;
+  $packet->pitch = $pitch;
+  $player->getNetworkSession()->sendDataPacket($packet);
   }
   
  public function getIsland($name){
-   $dir = $this->getDataFolder() . "/islands/" . substr($name, 0, 1) . "/";
+  $dir = $this->getDataFolder() . "/islands/" . substr($name, 0, 1) . "/";
     if (!is_dir($dir)) {
       mkdir($dir);
      }
     $cfg = new Config($dir . "$name.yml", Config::YAML);
     return $cfg;
-    }
+   }
+
  public function setData($name, $key, $data){
-   $dir = $this->getDataFolder() . "/islands/" . substr($name, 0, 1) . "/";
+  $dir = $this->getDataFolder() . "/islands/" . substr($name, 0, 1) . "/";
     if (!is_dir($dir)) {
       mkdir($dir);
      }
     $cfg = new Config($dir . "$name.yml", Config::YAML);
     $cfg->set($key, $data);
     $cfg->save();
-    }
+   }
 }
