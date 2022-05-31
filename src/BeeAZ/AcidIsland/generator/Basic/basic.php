@@ -45,7 +45,7 @@ class basic extends Generator{
        for($x = 6; $x < 9; $x++){
          for($z = 6; $z < 9; $z++){
            $chunk->setFullBlock($x, 69, $z, BlockLegacyIds::LEAVES << 4);
-             $chunk->setFullBlock($x, 62, $z, BlockLegacyIds::DIRT << 4);
+           $chunk->setFullBlock($x, 62, $z, BlockLegacyIds::DIRT << 4);
       }
    }
         $chunk->setFullBlock(7, 60, 7, BlockLegacyIds::BEDROCK << 4);
