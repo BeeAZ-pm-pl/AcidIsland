@@ -1,3 +1,5 @@
+config-version: 1
+
 start-item:
  - "325:8:2"
  - "325:10:1"
@@ -13,7 +15,7 @@ start-item:
  - "299:0:1"
  - "300:0:1"
  - "301:0:1"
-
+ 
 #message
 ISLAND-NOTFOUND: "§e§lIsland Not Found"
 PLAYER-NOTFOUND: "§e§lPlayer Not Found"
@@ -36,3 +38,5 @@ PVP: "§e§lPvp on"
 NOPVP: "§e§lPvp off"
 LOCK: "§e§lLock on"
 UNLOCK: "§e§lUnlock"
+TopCount: 10
+TopElement: "{player} with {value} points"
