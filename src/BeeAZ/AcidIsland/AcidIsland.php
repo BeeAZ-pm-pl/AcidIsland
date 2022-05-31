@@ -32,7 +32,7 @@ class AcidIsland extends PluginBase implements Listener{
         GeneratorManager::getInstance()->addGenerator(basic::class, "basic", fn() => null, true);
         $this->saveDefaultConfig();
         $this->cfg = new Config($this->getDataFolder()."config.yml",Config::YAML);
-         @mkdir($this->getDataFolder()."islands/");
+        @mkdir($this->getDataFolder()."islands/");
         $this->getServer()->getCommandMap()->register($this->getDescription()->getName(), new AICommand($this));
         $this->provider = new SQLiteProvider($this);
         $this->provider->initDataBase();
@@ -49,11 +49,11 @@ class AcidIsland extends PluginBase implements Listener{
  
  public function checkConfig(){
         if ($this->cfg->get("config-version", false) !== 1) {
-		   	$this->getLogger()->notice("Your configuration file is outdated, updating the config.yml...");
-			  $this->getLogger()->notice("The old configuration file can be found at config_old.yml");
-			  rename($this->getDataFolder() . "config.yml", $this->getDataFolder() . "config_old.yml");
-			  $this->saveDefaultConfig();
-		  	$this->getConfig()->reload();
+		   $this->getLogger()->notice("Your configuration file is outdated, updating the config.yml...");
+                   $this->getLogger()->notice("The old configuration file can be found at config_old.yml");
+	           rename($this->getDataFolder() . "config.yml", $this->getDataFolder() . "config_old.yml");
+		   $this->saveDefaultConfig();
+		   $this->getConfig()->reload();
 		  }
  	 }
  
