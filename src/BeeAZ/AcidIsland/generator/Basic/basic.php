@@ -16,38 +16,38 @@ class basic extends Generator{
     }
 
     public function generateChunk(ChunkManager $world, $chunkX, $chunkZ): void{
-      $chunk = $world->getChunk($chunkX, $chunkZ);
-     for($Z = 0; $Z < 16; ++$Z){
-      for($X = 0; $X < 16; ++$X){
-      $chunk->setFullBlock($X, 0, $Z, BlockLegacyIds::BEDROCK << 4);
-     for ($y = 1; $y < 65; ++$y) {
-       $chunk->setFullBlock($X, $y, $Z, BlockLegacyIds::WATER << 4);
-     }
-       }
-        }
+     $chunk = $world->getChunk($chunkX, $chunkZ);
+       for($Z = 0; $Z < 16; ++$Z){
+         for($X = 0; $X < 16; ++$X){
+           $chunk->setFullBlock($X, 0, $Z, BlockLegacyIds::BEDROCK << 4);
+             for($y = 1; $y < 65; ++$y) {
+               $chunk->setFullBlock($X, $y, $Z, BlockLegacyIds::WATER << 4);
+      }
+    }
+  }
      if($chunkX == 0 && $chunkZ == 0) {
-   for($x = 4; $x < 11; $x++){
-    for($z = 4; $z < 11; $z++){
-     $chunk->setFullBlock($x, 64, $z, BlockLegacyIds::GRASS << 4);
-            }
-        }
-   for($x = 4; $x < 11; $x++){
-    for($z = 4; $z < 11; $z++){
-     $chunk->setFullBlock($x, 63, $z, BlockLegacyIds::GRASS << 4);
-            }
-        }
-    for($x = 5; $x < 10; $x++){
-     for($z = 5; $z < 10; $z++){
-      $chunk->setFullBlock($x, 63, $z, BlockLegacyIds::DIRT << 4);
-        $chunk->setFullBlock($x, 68, $z, BlockLegacyIds::LEAVES << 4); 
-            }
-        }
-    for($x = 6; $x < 9; $x++){
-     for($z = 6; $z < 9; $z++){
-     $chunk->setFullBlock($x, 69, $z, BlockLegacyIds::LEAVES << 4);
-     $chunk->setFullBlock($x, 62, $z, BlockLegacyIds::DIRT << 4);
-            }
-        }
+       for($x = 4; $x < 11; $x++){
+         for($z = 4; $z < 11; $z++){
+           $chunk->setFullBlock($x, 64, $z, BlockLegacyIds::GRASS << 4);
+     }
+   }
+       for($x = 4; $x < 11; $x++){
+         for($z = 4; $z < 11; $z++){
+           $chunk->setFullBlock($x, 63, $z, BlockLegacyIds::GRASS << 4);
+      }
+    }
+       for($x = 5; $x < 10; $x++){
+         for($z = 5; $z < 10; $z++){
+           $chunk->setFullBlock($x, 63, $z, BlockLegacyIds::DIRT << 4);
+           $chunk->setFullBlock($x, 68, $z, BlockLegacyIds::LEAVES << 4); 
+      }
+    }
+       for($x = 6; $x < 9; $x++){
+         for($z = 6; $z < 9; $z++){
+           $chunk->setFullBlock($x, 69, $z, BlockLegacyIds::LEAVES << 4);
+             $chunk->setFullBlock($x, 62, $z, BlockLegacyIds::DIRT << 4);
+      }
+   }
         $chunk->setFullBlock(7, 60, 7, BlockLegacyIds::BEDROCK << 4);
         $chunk->setFullBlock(7, 61, 7, BlockLegacyIds::SAND << 4);
         $chunk->setFullBlock(7, 62, 7, BlockLegacyIds::SAND << 4);
@@ -113,5 +113,5 @@ class basic extends Generator{
         }
     }
     public function populateChunk(ChunkManager $world, $chunkX, $chunkY): void{
-                }
-            }
+         }
+     }
