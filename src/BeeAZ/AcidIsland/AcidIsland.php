@@ -44,13 +44,13 @@ class AcidIsland extends PluginBase implements Listener{
  }
 
  public function onDisable(): void{
-  if($this->prepare){
-   $this->prepare->close();
-}
+        if($this->prepare){
+          $this->prepare->close();
+ }
 }
  
  public function getProvider() : SQLiteProvider{
-  return $this->provider;
+        return $this->provider;
  }
  
  public function checkConfig(){
