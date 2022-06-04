@@ -42,12 +42,6 @@ class AcidIsland extends PluginBase implements Listener{
  public static function getInstance(): AcidIsland{
         return self::$instance;
  }
-
- public function onDisable(): void{
-        if($this->prepare){
-          $this->prepare->close();
- }
-}
  
  public function getProvider() : SQLiteProvider{
         return $this->provider;
