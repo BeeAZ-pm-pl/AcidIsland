@@ -35,7 +35,6 @@ class SQLiteProvider{
         $this->plugin->prepare = $this->db->prepare("SELECT * FROM top WHERE name = :name");
         $this->plugin->prepare->bindValue(":name", $name);
         $this->plugin->result = $this->plugin->prepare->execute();
-        $this->plugin->prepare->close();
         if($this->plugin->result->fetchArray(SQLITE3_ASSOC) == false){
         $this->plugin->prepare = $this->db->prepare("INSERT INTO top (name) VALUES (:name);");
         $this->plugin->prepare->bindValue(":name", $name);
