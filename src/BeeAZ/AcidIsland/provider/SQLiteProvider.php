@@ -35,10 +35,12 @@ class SQLiteProvider{
         $this->plugin->prepare = $this->db->prepare("SELECT * FROM top WHERE name = :name");
         $this->plugin->prepare->bindValue(":name", $name);
         $this->plugin->result = $this->plugin->prepare->execute();
+        $this->plugin->prepare->close();
         if($this->plugin->result->fetchArray(SQLITE3_ASSOC) == false){
         $this->plugin->prepare = $this->db->prepare("INSERT INTO top (name) VALUES (:name);");
         $this->plugin->prepare->bindValue(":name", $name);
         $this->plugin->result = $this->plugin->prepare->execute();
+        $this->plugin->prepare->close();
    }
 }
 
@@ -47,6 +49,7 @@ class SQLiteProvider{
         $this->plugin->prepare->bindValue(":data", $value);
         $this->plugin->prepare->bindValue(":name", $name);
         $this->plugin->result = $this->plugin->prepare->execute();
+        $this->plugin->prepare->close();
  }
 
  public function setDefaultValue($name){
@@ -54,6 +57,7 @@ class SQLiteProvider{
         $this->plugin->prepare->bindValue(":data", 0);
         $this->plugin->prepare->bindValue(":name", $name);
         $this->plugin->result = $this->plugin->prepare->execute();
+        $this->plugin->prepare->close();
  }
  
  public function sort($type){
@@ -64,5 +68,6 @@ class SQLiteProvider{
         while($element = $top->fetchArray(SQLITE3_ASSOC))
         $list .= str_replace(['{player}', '{value}'], [$element['name'], $element[$type]], $cfg['TopElement'])."\n";
         return $list;
+        $top->close();
   }
 }
