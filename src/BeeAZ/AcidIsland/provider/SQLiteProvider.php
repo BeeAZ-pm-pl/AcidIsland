@@ -40,7 +40,7 @@ class SQLiteProvider{
         $this->plugin->prepare = $this->db->prepare("INSERT INTO top (name) VALUES (:name);");
         $this->plugin->prepare->bindValue(":name", $name);
         $this->plugin->result = $this->plugin->prepare->execute();
-        $this->plugin->prepare->close();
+        $this->plugin->result->close();
    }
 }
 
@@ -49,7 +49,7 @@ class SQLiteProvider{
         $this->plugin->prepare->bindValue(":data", $value);
         $this->plugin->prepare->bindValue(":name", $name);
         $this->plugin->result = $this->plugin->prepare->execute();
-        $this->plugin->prepare->close();
+        $this->plugin->result->close();
  }
 
  public function setDefaultValue($name){
@@ -57,17 +57,18 @@ class SQLiteProvider{
         $this->plugin->prepare->bindValue(":data", 0);
         $this->plugin->prepare->bindValue(":name", $name);
         $this->plugin->result = $this->plugin->prepare->execute();
-        $this->plugin->prepare->close();
+        $this->plugin->result->close();
  }
  
  public function sort($type){
         $cfg = $this->plugin->getConfig()->getAll();
         $count = $cfg['TopCount'];
-        $top = $this->db->query("SELECT name,$type FROM top ORDER BY $type DESC LIMIT $count");
+        $top = $this->db->prepare("SELECT name,$type FROM top ORDER BY $type DESC LIMIT $count");
         $list = "";
         while($element = $top->fetchArray(SQLITE3_ASSOC))
         $list .= str_replace(['{player}', '{value}'], [$element['name'], $element[$type]], $cfg['TopElement'])."\n";
         return $list;
+        $top->execute();
         $top->close();
   }
 }
