@@ -101,4 +101,7 @@ class AcidIsland extends PluginBase implements Listener{
         $cfg->set($key, $data);
         $cfg->save();
    }
+ public function onDisable(): void{
+        $this->getProvider()->db->close();
+}
 }
