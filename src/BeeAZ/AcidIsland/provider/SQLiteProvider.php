@@ -29,6 +29,7 @@ class SQLiteProvider{
  
  public function createDB(){
         $this->db->exec("CREATE TABLE IF NOT EXISTS top (name TEXT PRIMARY KEY NOT NULL, data INTEGER default 0 NOT NULL);");
+        $this->db->close();
  }
  
  public function createTopData($name){
