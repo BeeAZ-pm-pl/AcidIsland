@@ -2,11 +2,9 @@
 
 namespace BeeAZ\AcidIsland\generator\Basic;
 
-use pocketmine\math\Vector3;
 use pocketmine\world\ChunkManager;
 use pocketmine\block\BlockLegacyIds;
 use pocketmine\world\generator\Generator;
-use pocketmine\world\format\Chunk;
 
 class basic extends Generator {
 

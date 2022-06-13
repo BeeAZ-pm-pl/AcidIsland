@@ -2,7 +2,6 @@
 
 namespace BeeAZ\AcidIsland\commands\subcommand;
 
-use pocketmine\player\Player;
 use pocketmine\command\CommandSender;
 
 class About {

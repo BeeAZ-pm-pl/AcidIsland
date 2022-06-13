@@ -2,8 +2,6 @@
 
 namespace BeeAZ\AcidIsland\commands\subcommand;
 
-use pocketmine\Server;
-use pocketmine\player\Player;
 use pocketmine\command\CommandSender;
 use BeeAZ\AcidIsland\AcidIsland;
 

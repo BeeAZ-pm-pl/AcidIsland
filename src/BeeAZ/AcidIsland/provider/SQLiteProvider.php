@@ -2,7 +2,6 @@
 
 namespace BeeAZ\AcidIsland\provider;
 
-use pocketmine\Server;
 use BeeAZ\AcidIsland\AcidIsland;
 use SQLite3;
 

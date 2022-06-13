@@ -3,7 +3,6 @@
 namespace BeeAZ\AcidIsland\commands;
 
 use pocketmine\command\Command;
-use pocketmine\player\Player;
 use BeeAZ\AcidIsland\AcidIsland;
 use pocketmine\command\CommandSender;
 use pocketmine\plugin\PluginOwned;
