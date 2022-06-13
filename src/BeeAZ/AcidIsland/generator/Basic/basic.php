@@ -8,7 +8,7 @@ use pocketmine\block\BlockLegacyIds;
 use pocketmine\world\ChunkManager;
 use pocketmine\world\generator\Generator;
 
-class basic extends Generator {
+class Basic extends Generator {
 
 	public function __construct(int $seed, string $preset) {
 		parent::__construct($seed, $preset);

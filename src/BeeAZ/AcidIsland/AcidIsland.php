@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BeeAZ\AcidIsland;
 
 use BeeAZ\AcidIsland\commands\AICommand;
-use BeeAZ\AcidIsland\generator\Basic\basic;
+use BeeAZ\AcidIsland\generator\Basic\Basic;
 use BeeAZ\AcidIsland\provider\SQLiteProvider;
 use pocketmine\event\Listener;
 use pocketmine\item\ItemFactory;
