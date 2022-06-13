@@ -1,18 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BeeAZ\AcidIsland;
 
-use pocketmine\plugin\PluginBase;
-use pocketmine\event\Listener;
-use pocketmine\world\generator\GeneratorManager;
-use BeeAZ\AcidIsland\generator\Basic\basic;
-use pocketmine\network\mcpe\protocol\PlaySoundPacket;
-use BeeAZ\AcidIsland\EventListener;
-use pocketmine\utils\Config;
-use pocketmine\player\Player;
-use pocketmine\item\ItemFactory;
 use BeeAZ\AcidIsland\commands\AICommand;
+use BeeAZ\AcidIsland\generator\Basic\basic;
 use BeeAZ\AcidIsland\provider\SQLiteProvider;
+use pocketmine\event\Listener;
+use pocketmine\item\ItemFactory;
+use pocketmine\network\mcpe\protocol\PlaySoundPacket;
+use pocketmine\player\Player;
+use pocketmine\plugin\PluginBase;
+use pocketmine\utils\Config;
+use pocketmine\world\generator\GeneratorManager;
+use function explode;
+use function is_dir;
+use function mkdir;
+use function rename;
+use function strtolower;
+use function substr;
 
 class AcidIsland extends PluginBase implements Listener {
 
@@ -26,7 +33,7 @@ class AcidIsland extends PluginBase implements Listener {
 
 	public mixed $result;
 
-	public function onEnable(): void {
+	public function onEnable() : void {
 		self::$instance = $this;
 		$this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
 		GeneratorManager::getInstance()->addGenerator(basic::class, "basic", fn () => null, true);
@@ -39,11 +46,11 @@ class AcidIsland extends PluginBase implements Listener {
 		$this->checkConfig();
 	}
 
-	public static function getInstance(): AcidIsland {
+	public static function getInstance() : AcidIsland {
 		return self::$instance;
 	}
 
-	public function getProvider(): SQLiteProvider {
+	public function getProvider() : SQLiteProvider {
 		return $this->provider;
 	}
 
@@ -68,11 +75,11 @@ class AcidIsland extends PluginBase implements Listener {
 		$this->setData($name, "pvp", false);
 		foreach ($this->cfg->get("start-item") as $start) {
 			$item = explode(":", $start);
-			$player->getInventory()->addItem(ItemFactory::getInstance()->get((int)$item[0], (int)$item[1], (int)$item[2]));
+			$player->getInventory()->addItem(ItemFactory::getInstance()->get((int) $item[0], (int) $item[1], (int) $item[2]));
 		}
 	}
 
-	public function playSound($player, string $sound, float $volume = 0, float $pitch = 0): void {
+	public function playSound($player, string $sound, float $volume = 0, float $pitch = 0) : void {
 		$packet = new PlaySoundPacket();
 		$packet->soundName = $sound;
 		$packet->x = $player->getPosition()->getX();
@@ -101,7 +108,7 @@ class AcidIsland extends PluginBase implements Listener {
 		$cfg->set($key, $data);
 		$cfg->save();
 	}
-	public function onDisable(): void {
+	public function onDisable() : void {
 		$this->getProvider()->db->close();
 	}
 }

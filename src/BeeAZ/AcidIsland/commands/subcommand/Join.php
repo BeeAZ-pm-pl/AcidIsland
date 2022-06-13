@@ -1,14 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BeeAZ\AcidIsland\commands\subcommand;
 
-use pocketmine\Server;
-use pocketmine\player\Player;
 use BeeAZ\AcidIsland\AcidIsland;
 use pocketmine\command\CommandSender;
+use pocketmine\player\Player;
+use pocketmine\Server;
 use pocketmine\world\generator\GeneratorManager;
-use pocketmine\world\WorldCreationOptions;
 use pocketmine\world\Position;
+use pocketmine\world\WorldCreationOptions;
+use function mt_rand;
+use function str_replace;
+use function strtolower;
 
 class Join {
 

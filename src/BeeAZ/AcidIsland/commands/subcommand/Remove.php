@@ -1,9 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BeeAZ\AcidIsland\commands\subcommand;
 
-use pocketmine\command\CommandSender;
 use BeeAZ\AcidIsland\AcidIsland;
+use pocketmine\command\CommandSender;
+use function array_slice;
+use function count;
+use function explode;
+use function implode;
+use function in_array;
+use function str_replace;
+use function strtolower;
 
 class Remove {
 
@@ -19,7 +28,7 @@ class Remove {
 		$ai = AcidIsland::getInstance();
 		if ($ai->isIsland($name)) {
 			$ex = explode(",", $ai->getIsland($name)->get("member"));
-			if (in_array($data, $ex)) {
+			if (in_array($data, $ex, true)) {
 				$im = implode(",", $ex);
 				$replace = str_replace("," . $data, "", $im);
 				if ($data !== $name) {

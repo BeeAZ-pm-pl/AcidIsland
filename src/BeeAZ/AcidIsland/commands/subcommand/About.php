@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BeeAZ\AcidIsland\commands\subcommand;
 
 use pocketmine\command\CommandSender;

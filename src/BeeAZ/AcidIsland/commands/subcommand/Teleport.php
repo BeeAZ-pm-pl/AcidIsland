@@ -1,14 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BeeAZ\AcidIsland\commands\subcommand;
 
-use pocketmine\Server;
-use pocketmine\command\CommandSender;
 use BeeAZ\AcidIsland\AcidIsland;
+use pocketmine\command\CommandSender;
+use pocketmine\Server;
 use pocketmine\world\Position;
+use function array_slice;
+use function count;
+use function implode;
+use function str_replace;
+use function strtolower;
 
 class Teleport {
-
 
 	public function onCommand(CommandSender $player, array $args) {
 		if (!$player->hasPermission("acidisland.teleport")) {

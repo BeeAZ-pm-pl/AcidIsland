@@ -1,12 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BeeAZ\AcidIsland\commands\subcommand;
 
-use pocketmine\command\CommandSender;
 use BeeAZ\AcidIsland\AcidIsland;
+use pocketmine\command\CommandSender;
+use function array_slice;
+use function count;
+use function implode;
+use function strtolower;
 
 class Setting {
-
 
 	public function onCommand(CommandSender $player, array $args) {
 		if (!$player->hasPermission("acidisland.setting")) {

@@ -1,10 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BeeAZ\AcidIsland\commands\subcommand;
 
-use pocketmine\Server;
-use pocketmine\command\CommandSender;
 use BeeAZ\AcidIsland\AcidIsland;
+use pocketmine\command\CommandSender;
+use pocketmine\Server;
+use function array_slice;
+use function count;
+use function explode;
+use function implode;
+use function in_array;
+use function strtolower;
 
 class Add {
 
@@ -22,7 +30,7 @@ class Add {
 		if ($server->getPlayerExact($data) !== null) {
 			if ($ai->isIsland($name)) {
 				$ex = explode(",", $ai->getIsland($name)->get("member"));
-				if (!in_array($data, $ex)) {
+				if (!in_array($data, $ex, true)) {
 					$im = implode(",", $ex);
 					$add = "$im," . $data;
 					$ai->setData($name, "member", $add);

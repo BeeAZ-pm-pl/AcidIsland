@@ -1,9 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BeeAZ\AcidIsland\provider;
 
 use BeeAZ\AcidIsland\AcidIsland;
 use SQLite3;
+use function file_exists;
+use function str_replace;
 
 class SQLiteProvider {
 
@@ -12,7 +16,6 @@ class SQLiteProvider {
 	public AcidIsland $plugin;
 
 	public function __construct(AcidIsland $plugin) {
-
 		$this->plugin = $plugin;
 	}
 
@@ -63,8 +66,9 @@ class SQLiteProvider {
 		$this->plugin->prepare = $this->db->prepare("SELECT name,$type FROM top ORDER BY $type DESC LIMIT $count");
 		$this->plugin->result = $this->plugin->prepare->execute();
 		$list = "";
-		while ($element = $this->plugin->result->fetchArray(SQLITE3_ASSOC))
+		while ($element = $this->plugin->result->fetchArray(SQLITE3_ASSOC)) {
 			$list .= str_replace(['{player}', '{value}'], [$element['name'], $element[$type]], $cfg['TopElement']) . "\n";
+		}
 		return $list;
 		$this->plugin->prepare->close();
 	}

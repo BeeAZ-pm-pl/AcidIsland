@@ -1,22 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BeeAZ\AcidIsland\commands;
 
-use pocketmine\command\Command;
 use BeeAZ\AcidIsland\AcidIsland;
+use BeeAZ\AcidIsland\commands\subcommand\About;
+use BeeAZ\AcidIsland\commands\subcommand\Add;
+use BeeAZ\AcidIsland\commands\subcommand\Delete;
+use BeeAZ\AcidIsland\commands\subcommand\Help;
+use BeeAZ\AcidIsland\commands\subcommand\Info;
+use BeeAZ\AcidIsland\commands\subcommand\Join;
+use BeeAZ\AcidIsland\commands\subcommand\Kick;
+use BeeAZ\AcidIsland\commands\subcommand\Remove;
+use BeeAZ\AcidIsland\commands\subcommand\Setting;
+use BeeAZ\AcidIsland\commands\subcommand\Teleport;
+use BeeAZ\AcidIsland\commands\subcommand\Top;
+use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\plugin\PluginOwned;
-use BeeAZ\AcidIsland\commands\subcommand\Join;
-use BeeAZ\AcidIsland\commands\subcommand\Help;
-use BeeAZ\AcidIsland\commands\subcommand\Add;
-use BeeAZ\AcidIsland\commands\subcommand\Remove;
-use BeeAZ\AcidIsland\commands\subcommand\Info;
-use BeeAZ\AcidIsland\commands\subcommand\Teleport;
-use BeeAZ\AcidIsland\commands\subcommand\Setting;
-use BeeAZ\AcidIsland\commands\subcommand\Kick;
-use BeeAZ\AcidIsland\commands\subcommand\Delete;
-use BeeAZ\AcidIsland\commands\subcommand\About;
-use BeeAZ\AcidIsland\commands\subcommand\Top;
 
 class AICommand extends Command implements PluginOwned {
 
@@ -103,7 +105,7 @@ class AICommand extends Command implements PluginOwned {
 			$this->help->onCommand($player);
 		}
 	}
-	public function getOwningPlugin(): AcidIsland {
+	public function getOwningPlugin() : AcidIsland {
 		return $this->plugin;
 	}
 }

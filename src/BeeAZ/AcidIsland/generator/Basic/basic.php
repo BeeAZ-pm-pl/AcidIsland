@@ -1,19 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BeeAZ\AcidIsland\generator\Basic;
 
-use pocketmine\world\ChunkManager;
 use pocketmine\block\BlockLegacyIds;
+use pocketmine\world\ChunkManager;
 use pocketmine\world\generator\Generator;
 
 class basic extends Generator {
-
 
 	public function __construct(int $seed, string $preset) {
 		parent::__construct($seed, $preset);
 	}
 
-	public function generateChunk(ChunkManager $world, $chunkX, $chunkZ): void {
+	public function generateChunk(ChunkManager $world, $chunkX, $chunkZ) : void {
 		$chunk = $world->getChunk($chunkX, $chunkZ);
 		for ($Z = 0; $Z < 16; ++$Z) {
 			for ($X = 0; $X < 16; ++$X) {
@@ -110,6 +111,6 @@ class basic extends Generator {
 			$chunk->setFullBlock(10, 63, 5, BlockLegacyIds::DIRT << 4);
 		}
 	}
-	public function populateChunk(ChunkManager $world, $chunkX, $chunkY): void {
+	public function populateChunk(ChunkManager $world, $chunkX, $chunkY) : void {
 	}
 }
