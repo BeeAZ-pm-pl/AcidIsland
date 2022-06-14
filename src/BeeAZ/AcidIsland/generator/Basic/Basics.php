@@ -111,6 +111,7 @@ class Basic extends Generator {
 			$chunk->setFullBlock(10, 63, 5, BlockLegacyIds::DIRT << 4);
 		}
 	}
+
 	public function populateChunk(ChunkManager $world, $chunkX, $chunkY) : void {
 	}
 }
