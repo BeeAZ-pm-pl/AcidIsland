@@ -1,27 +1,26 @@
 name: AcidIsland
 main: BeeAZ\AcidIsland\AcidIsland
-author:
- - BeeAZ-pm-pl
+author: BeeAZ-pm-pl
 api: 4.0.0
 version: 0.0.2
 description: Acid Island Plugin For Pocketmine-MP
 
 permissions:
- acidisland.join:
-  default: true
- acidisland.add:
-  default: true
- acidisland.delete:
-  default: true
- acidisland.kick:
-  default: true
- acidisland.delete.other:
-  default: op
- acidisland.remove:
-  default: true
- acidisland.teleport:
-  default: true
- acidisland.info:
-  default: true
- acidisland.setting:
-  default: true
+  acidisland.join:
+    default: true
+  acidisland.add:
+    default: true
+  acidisland.delete:
+    default: true
+  acidisland.kick:
+    default: true
+  acidisland.delete.other:
+    default: op
+  acidisland.remove:
+   default: true
+  acidisland.teleport:
+    default: true
+  acidisland.info:
+    default: true
+  acidisland.setting:
+    default: true
