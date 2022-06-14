@@ -36,7 +36,7 @@ class AcidIsland extends PluginBase implements Listener {
 	public function onEnable() : void {
 		self::$instance = $this;
 		$this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
-		GeneratorManager::getInstance()->addGenerator(basic::class, "basic", fn () => null, true);
+		GeneratorManager::getInstance()->addGenerator(Basic::class, "basic", fn () => null, true);
 		$this->saveDefaultConfig();
 		$this->cfg = new Config($this->getDataFolder() . "config.yml", Config::YAML);
 		@mkdir($this->getDataFolder() . "islands/");
