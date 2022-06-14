@@ -38,6 +38,6 @@ class Join {
 		$generator = GeneratorManager::getInstance()->getGenerator("basic");
 		Server::getInstance()->getWorldManager()->generateWorld(name: "ai-$name", options: WorldCreationOptions::create()->setSeed($seed)->setGeneratorClass($generator->getGeneratorClass()));
 		$ai->createData($player);
-		$player->sendMessage(str_replace("{seed}", $seed, $ai->cfg->get("ISLAND-CREATE")));
+		$player->sendMessage(str_replace("{seed}", strval($seed), $ai->cfg->get("ISLAND-CREATE")));
 	}
 }
