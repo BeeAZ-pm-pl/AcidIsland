@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BeeAZ\AcidIsland;
 
-use pocketmine\block\BlockLegacyIds;
+use pocketmine\block\BlockTypeIds;
 use pocketmine\data\bedrock\EffectIdMap;
 use pocketmine\data\bedrock\EffectIds;
 use pocketmine\entity\effect\EffectInstance;
@@ -41,7 +41,7 @@ class EventListener implements Listener {
 		$pos = new Position($x, $y + 1, $z, $world);
 		$ex = explode("-", $wn);
 		if ($ex[0] == "ai") {
-			if ($world->getBlock($pos)->getId() === BlockLegacyIds::WATER) {
+			if ($world->getBlock($pos)->getTypeId() === BlockTypeIds::WATER) {
 				$player->getEffects()->add(new EffectInstance(EffectIdMap::getInstance()->fromId(EffectIds::BLINDNESS), 200, 2, true));
 				$player->getEffects()->add(new EffectInstance(EffectIdMap::getInstance()->fromId(EffectIds::POISON), 200, 2, true));
 				$player->getEffects()->add(new EffectInstance(EffectIdMap::getInstance()->fromId(EffectIds::WITHER), 200, 2, true));

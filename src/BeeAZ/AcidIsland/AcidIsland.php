@@ -8,7 +8,7 @@ use BeeAZ\AcidIsland\commands\AICommand;
 use BeeAZ\AcidIsland\generator\Basic\Basic;
 use BeeAZ\AcidIsland\provider\SQLiteProvider;
 use pocketmine\event\Listener;
-use pocketmine\item\ItemFactory;
+use pocketmine\item\LegacyStringToItemParser;
 use pocketmine\network\mcpe\protocol\PlaySoundPacket;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
@@ -75,7 +75,7 @@ class AcidIsland extends PluginBase implements Listener {
 		$this->setData($name, "pvp", false);
 		foreach ($this->cfg->get("start-item") as $start) {
 			$item = explode(":", $start);
-			$player->getInventory()->addItem(ItemFactory::getInstance()->get((int) $item[0], (int) $item[1], (int) $item[2]));
+			$player->getInventory()->addItem(LegacyStringToItemParser::getInstance()->parse((int) $item[0].':'.(int) $item[1])->setCount((int) $item[2]));
 		}
 	}
 
