@@ -1,7 +1,7 @@
 --- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/BeeAZ-pm-pl/AcidIsland
 build-by-default: true
 branches:
-- pm5
+- master
 projects:
   AcidIslandPM:
     path: ""
