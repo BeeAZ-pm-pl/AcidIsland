@@ -59,6 +59,7 @@ class AICommand extends Command implements PluginOwned {
 		$this->delete = new Delete();
 		$this->about = new About();
 		$this->top = new Top();
+                $this->setPermission("acidisland.default");
 	}
 
 	public function execute(CommandSender $player, string $label, array $args) {
