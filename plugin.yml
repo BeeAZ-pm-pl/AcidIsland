@@ -6,6 +6,8 @@ version: 0.0.3
 description: Acid Island Plugin For Pocketmine-MP
 
 permissions:
+  acidisland.default:
+    default: true
   acidisland.join:
     default: true
   acidisland.add:
