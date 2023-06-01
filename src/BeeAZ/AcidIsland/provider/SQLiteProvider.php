@@ -24,7 +24,7 @@ class SQLiteProvider {
 	}
 
 	public function initDataBase() {
-		if (!file_exists($this->getDataFolder() . 'top.db')) {
+		if (!file_exists($this->plugin->getDataFolder() . 'top.db')) {
 			$this->db = new \SQLite3($this->plugin->getDataFolder() . 'top.db', SQLITE3_OPEN_READWRITE | SQLITE3_OPEN_CREATE);
 		} else {
 			$this->db = new \SQLite3($this->plugin->getDataFolder() . 'top.db', SQLITE3_OPEN_READWRITE);
