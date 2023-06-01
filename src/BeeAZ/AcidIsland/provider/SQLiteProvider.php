@@ -14,13 +14,17 @@ class SQLiteProvider {
 	public SQLite3 $db;
 
 	public AcidIsland $plugin;
+	
+	public mixed $prepare;
+	
+	public mixed $result;
 
 	public function __construct(AcidIsland $plugin) {
 		$this->plugin = $plugin;
 	}
 
 	public function initDataBase() {
-		if (!file_exists($this->plugin->getDataFolder() . 'top.db')) {
+		if (!file_exists($this->getDataFolder() . 'top.db')) {
 			$this->db = new \SQLite3($this->plugin->getDataFolder() . 'top.db', SQLITE3_OPEN_READWRITE | SQLITE3_OPEN_CREATE);
 		} else {
 			$this->db = new \SQLite3($this->plugin->getDataFolder() . 'top.db', SQLITE3_OPEN_READWRITE);
@@ -33,43 +37,43 @@ class SQLiteProvider {
 	}
 
 	public function createTopData($name) {
-		$this->plugin->prepare = $this->db->prepare("SELECT * FROM top WHERE name = :name");
-		$this->plugin->prepare->bindValue(":name", $name);
-		$this->plugin->result = $this->plugin->prepare->execute();
-		if ($this->plugin->result->fetchArray(SQLITE3_ASSOC) == false) {
-			$this->plugin->prepare = $this->db->prepare("INSERT INTO top (name) VALUES (:name);");
-			$this->plugin->prepare->bindValue(":name", $name);
-			$this->plugin->result = $this->plugin->prepare->execute();
-			$this->plugin->prepare->close();
+		$this->prepare = $this->db->prepare("SELECT * FROM top WHERE name = :name");
+		$this->prepare->bindValue(":name", $name);
+		$this->result = $this->prepare->execute();
+		if ($this->result->fetchArray(SQLITE3_ASSOC) == false) {
+			$this->prepare = $this->db->prepare("INSERT INTO top (name) VALUES (:name);");
+			$this->prepare->bindValue(":name", $name);
+			$this->result = $this->prepare->execute();
+			$this->prepare->close();
 		}
 	}
 
 	public function setValue($name, $value) {
-		$this->plugin->prepare = $this->db->prepare("UPDATE top SET data = data + :data WHERE name = :name");
-		$this->plugin->prepare->bindValue(":data", $value);
-		$this->plugin->prepare->bindValue(":name", $name);
-		$this->plugin->result = $this->plugin->prepare->execute();
-		$this->plugin->prepare->close();
+		$this->prepare = $this->db->prepare("UPDATE top SET data = data + :data WHERE name = :name");
+		$this->prepare->bindValue(":data", $value);
+		$this->prepare->bindValue(":name", $name);
+		$this->result = $this->prepare->execute();
+		$this->prepare->close();
 	}
 
 	public function setDefaultValue($name) {
-		$this->plugin->prepare = $this->db->prepare("UPDATE top SET data = :data WHERE name = :name");
-		$this->plugin->prepare->bindValue(":data", 0);
-		$this->plugin->prepare->bindValue(":name", $name);
-		$this->plugin->result = $this->plugin->prepare->execute();
-		$this->plugin->prepare->close();
+		$this->prepare = $this->db->prepare("UPDATE top SET data = :data WHERE name = :name");
+		$this->prepare->bindValue(":data", 0);
+		$this->prepare->bindValue(":name", $name);
+		$this->result = $this->prepare->execute();
+		$this->prepare->close();
 	}
 
 	public function sort($type) {
-		$cfg = $this->plugin->getConfig()->getAll();
+		$cfg = $this->getConfig()->getAll();
 		$count = $cfg['TopCount'];
-		$this->plugin->prepare = $this->db->prepare("SELECT name,$type FROM top ORDER BY $type DESC LIMIT $count");
-		$this->plugin->result = $this->plugin->prepare->execute();
+		$this->prepare = $this->db->prepare("SELECT name,$type FROM top ORDER BY $type DESC LIMIT $count");
+		$this->result = $this->prepare->execute();
 		$list = "";
-		while ($element = $this->plugin->result->fetchArray(SQLITE3_ASSOC)) {
+		while ($element = $this->result->fetchArray(SQLITE3_ASSOC)) {
 			$list .= str_replace(['{player}', '{value}'], [$element['name'], $element[$type]], $cfg['TopElement']) . "\n";
 		}
 		return $list;
-		$this->plugin->prepare->close();
+		$this->prepare->close();
 	}
 }
