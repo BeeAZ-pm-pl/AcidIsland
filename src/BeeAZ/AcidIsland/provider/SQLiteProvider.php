@@ -37,10 +37,11 @@ class SQLiteProvider {
 		$prepare->bindValue(":name", $name);
 		$result = $prepare->execute();
 		if ($result->fetchArray(SQLITE3_ASSOC) == false) {
+		  $prepare->reset();
 			$prepare = $this->db->prepare("INSERT INTO top (name) VALUES (:name);");
 			$prepare->bindValue(":name", $name);
-			$prepare->reset();
 		}
+			$prepare->reset();
 	}
 
 	public function setValue($name, $value) {
