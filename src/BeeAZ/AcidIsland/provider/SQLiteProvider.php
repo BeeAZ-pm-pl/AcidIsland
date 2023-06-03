@@ -14,10 +14,6 @@ class SQLiteProvider {
 	public SQLite3 $db;
 
 	public AcidIsland $plugin;
-	
-	public mixed $prepare;
-	
-	public mixed $result;
 
 	public function __construct(AcidIsland $plugin) {
 		$this->plugin = $plugin;
@@ -37,43 +33,40 @@ class SQLiteProvider {
 	}
 
 	public function createTopData($name) {
-		$this->prepare = $this->db->prepare("SELECT * FROM top WHERE name = :name");
-		$this->prepare->bindValue(":name", $name);
-		$this->result = $this->prepare->execute();
-		if ($this->result->fetchArray(SQLITE3_ASSOC) == false) {
-			$this->prepare = $this->db->prepare("INSERT INTO top (name) VALUES (:name);");
-			$this->prepare->bindValue(":name", $name);
-			$this->result = $this->prepare->execute();
-			$this->prepare->close();
+		$prepare = $this->db->prepare("SELECT * FROM top WHERE name = :name");
+		$prepare->bindValue(":name", $name);
+		$result = $prepare->execute();
+		if ($result->fetchArray(SQLITE3_ASSOC) == false) {
+			$prepare = $this->db->prepare("INSERT INTO top (name) VALUES (:name);");
+			$prepare->bindValue(":name", $name);
+			$prepare->reset();
 		}
 	}
 
 	public function setValue($name, $value) {
-		$this->prepare = $this->db->prepare("UPDATE top SET data = data + :data WHERE name = :name");
-		$this->prepare->bindValue(":data", $value);
-		$this->prepare->bindValue(":name", $name);
-		$this->result = $this->prepare->execute();
-		$this->prepare->close();
+		$prepare = $this->db->prepare("UPDATE top SET data = data + :data WHERE name = :name");
+		$prepare->bindValue(":data", $value);
+		$prepare->bindValue(":name", $name);
+		$prepare->reset();
 	}
 
 	public function setDefaultValue($name) {
-		$this->prepare = $this->db->prepare("UPDATE top SET data = :data WHERE name = :name");
-		$this->prepare->bindValue(":data", 0);
-		$this->prepare->bindValue(":name", $name);
-		$this->result = $this->prepare->execute();
-		$this->prepare->close();
+		$prepare = $this->db->prepare("UPDATE top SET data = :data WHERE name = :name");
+		$prepare->bindValue(":data", 0);
+		$prepare->bindValue(":name", $name);
+		$prepare->reset();
 	}
 
 	public function sort($type) {
 		$cfg = $this->getConfig()->getAll();
 		$count = $cfg['TopCount'];
-		$this->prepare = $this->db->prepare("SELECT name,$type FROM top ORDER BY $type DESC LIMIT $count");
-		$this->result = $this->prepare->execute();
+		$prepare = $this->db->prepare("SELECT name,$type FROM top ORDER BY $type DESC LIMIT $count");
+		$result = $prepare->execute();
 		$list = "";
-		while ($element = $this->result->fetchArray(SQLITE3_ASSOC)) {
+		while ($element = $result->fetchArray(SQLITE3_ASSOC)) {
 			$list .= str_replace(['{player}', '{value}'], [$element['name'], $element[$type]], $cfg['TopElement']) . "\n";
 		}
 		return $list;
-		$this->prepare->close();
+		$prepare->reset();
 	}
 }
