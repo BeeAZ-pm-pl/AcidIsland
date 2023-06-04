@@ -15,7 +15,6 @@ use BeeAZ\AcidIsland\commands\subcommand\Kick;
 use BeeAZ\AcidIsland\commands\subcommand\Remove;
 use BeeAZ\AcidIsland\commands\subcommand\Setting;
 use BeeAZ\AcidIsland\commands\subcommand\Teleport;
-use BeeAZ\AcidIsland\commands\subcommand\Top;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\plugin\PluginOwned;
