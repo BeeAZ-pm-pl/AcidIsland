@@ -25,12 +25,6 @@ use function strtolower;
 
 class EventListener implements Listener {
 
-	public function onJoin(PlayerJoinEvent $ev) {
-		$name = strtolower($ev->getPlayer()->getName());
-		$provider = AcidIsland::getInstance()->getProvider();
-		$provider->createTopData($name);
-	}
-
 	public function onMove(PlayerMoveEvent $ev) {
 		$player = $ev->getPlayer();
 		$world = $player->getWorld();
@@ -103,11 +97,6 @@ class EventListener implements Listener {
 						$ev->cancel();
 					}
 				}
-			}
-		}
-		if ($ex[0] == "ai") {
-			if ($ex[1] == $name) {
-				$ai->getProvider()->setValue($name, 1);
 			}
 		}
 	}

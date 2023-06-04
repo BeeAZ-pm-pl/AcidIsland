@@ -38,5 +38,3 @@ PVP: "§e§lPvp on"
 NOPVP: "§e§lPvp off"
 LOCK: "§e§lLock on"
 UNLOCK: "§e§lUnlock"
-TopCount: 10
-TopElement: "{player} with {value} points"

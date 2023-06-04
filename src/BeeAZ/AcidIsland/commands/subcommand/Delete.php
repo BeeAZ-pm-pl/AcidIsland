@@ -26,7 +26,6 @@ class Delete {
 			if (count($args) < 2) {
 				if ($ai->isIsland($name)) {
 					$this->removeIsland($name);
-					$ai->getProvider()->setDefaultValue($name);
 					$player->sendMessage($ai->cfg->get("ISLAND-DELETE"));
 					return true;
 				}
@@ -35,7 +34,6 @@ class Delete {
 				if ($player->hasPermission("acidisland.delete.other")) {
 					if ($ai->isIsland($a)) {
 						$this->removeIsland($a);
-						$ai->getProvider()->setDefaultValue($a);
 						$player->sendMessage($ai->cfg->get("ISLAND-DELETE-OTHER"));
 					} else {
 						$player->sendMessage($ai->cfg->get("ISLAND-NOTFOUND"));

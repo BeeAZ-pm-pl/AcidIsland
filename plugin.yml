@@ -13,7 +13,7 @@ permissions:
   acidisland.add:
     default: true
   acidisland.delete:
-    default: true
+    default: op
   acidisland.kick:
     default: true
   acidisland.delete.other:

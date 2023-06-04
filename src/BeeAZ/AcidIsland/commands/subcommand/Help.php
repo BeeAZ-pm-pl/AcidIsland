@@ -18,7 +18,6 @@ class Help {
 		$player->sendMessage("§a/ac remove <name> : §fRemove Player From Friend List");
 		$player->sendMessage("§a/ac info <name> : §fView player's island information");
 		$player->sendMessage("§a/ac setting <setting>: §fpvp, nopvp, lock, unlock");
-		$player->sendMessage("§a/ac top : §f Top island");
 		$player->sendMessage("§a/ac about : §f Plugin Information");
 	}
 }

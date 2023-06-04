@@ -44,8 +44,6 @@ class AICommand extends Command implements PluginOwned {
 
 	private $about;
 
-	private $top;
-
 	public function __construct() {
 		parent::__construct("acidisland", "AcidIsland Command", null, ["ai", "ac"]);
 		$this->join = new Join();
@@ -58,8 +56,7 @@ class AICommand extends Command implements PluginOwned {
 		$this->kick = new Kick();
 		$this->delete = new Delete();
 		$this->about = new About();
-		$this->top = new Top();
-                $this->setPermission("acidisland.default");
+        $this->setPermission("acidisland.default");
 	}
 
 	public function execute(CommandSender $player, string $label, array $args) {
@@ -97,9 +94,6 @@ class AICommand extends Command implements PluginOwned {
 					break;
 				case "about":
 					return $this->about->onCommand($player);
-					break;
-				case "top":
-					return $this->top->onCommand($player);
 					break;
 			}
 		} else {
