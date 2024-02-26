@@ -6,6 +6,7 @@ namespace BeeAZ\AcidIsland;
 
 use BeeAZ\AcidIsland\commands\AICommand;
 use BeeAZ\AcidIsland\generator\Basic\Basic;
+use BeeAZ\AcidIsland\commands\subcommand\join;
 use pocketmine\event\Listener;
 use pocketmine\item\LegacyStringToItemParser;
 use pocketmine\network\mcpe\protocol\PlaySoundPacket;
@@ -55,11 +56,15 @@ class AcidIsland extends PluginBase implements Listener {
 		return $this->getServer()->getWorldManager()->isWorldGenerated("ai-" . $name);
 	}
 
+
 	public function createData(Player $player) {
 		$name = strtolower($player->getName());
 		$this->setData($name, "member", $name);
 		$this->setData($name, "lock", false);
 		$this->setData($name, "pvp", false);
+		Server::getInstance()->getWorldManager()->loadWorld("ai-" . $name);
+		$player->teleport(new Position(7, 65, 5, Server::getInstance()->getWorldManager()->getWorldByName("ai-" . $name)));
+		$player->sendMessage($ai->cfg->get("ISLAND-JOIN"));
 		foreach ($this->cfg->get("start-item") as $start) {
 			$item = explode(":", $start);
 			$player->getInventory()->addItem(LegacyStringToItemParser::getInstance()->parse((int) $item[0].':'.(int) $item[1])->setCount((int) $item[2]));
